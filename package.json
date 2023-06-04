@@ -19,6 +19,8 @@
     "eslint-config-prettier": "^8.7.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react-perf": "^3.3.1",
+    "mobx": "^6.9.0",
+    "mobx-react-lite": "^3.4.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^6.8.2",
@@ -26,6 +28,7 @@
     "react-scripts": "5.0.1",
     "sass": "^1.58.3",
     "typescript": "^4.9.5",
+    "uuid": "^9.0.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -34,6 +37,7 @@
     "test": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject",
     "lint": "eslint ./src/",
+    "prettify": "prettier ./src --write",
     "precommit-hook": "lint-staged"
   },
   "husky": {
@@ -44,7 +48,7 @@
   },
   "lint-staged": {
     "src/**/*.scss": [
-      "stylelint scss"
+      "stylelint scss --fix"
     ],
     "src/**/*.{js,jsx,ts,tsx}": [
       "eslint --fix",
@@ -70,11 +74,13 @@
     ]
   },
   "devDependencies": {
+    "@types/uuid": "^9.0.1",
     "husky": "^4.3.8",
     "lint-staged": "^13.1.2",
     "prettier": "^2.8.4",
-    "stylelint": "^15.2.0",
+    "stylelint": "^15.6.3",
     "stylelint-config-clean-order": "^5.0.0",
-    "stylelint-config-standard": "^30.0.1"
+    "stylelint-config-standard": "^30.0.1",
+    "stylelint-config-standard-scss": "^9.0.0"
   }
 }

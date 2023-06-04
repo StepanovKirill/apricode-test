@@ -1,0 +1,13 @@
+.nextLevel {
+  margin-left: 16px;
+}
+
+.item {
+  display: flex;
+  height: 30px;
+  align-items: center;
+  border: 2px solid green;
+  background-color: greenyellow;
+
+  backdrop-filter: none;
+}
