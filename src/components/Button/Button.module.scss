@@ -1,0 +1,39 @@
+.base_button {
+  display: flex;  
+  border-radius: var(--size-s);
+  border: none;
+  justify-content: center;
+  align-items: center;
+  height: var(--size-xxl);
+  padding: var(--size-md);
+
+  font: var(--font-xs);
+  &:active {
+    box-shadow: var(--shadow);
+    transition-duration: 0.05s;
+    transform: translate(0px, var(--size-xs));
+  };
+  &:disabled {
+    opacity: var(--opacity-disable);
+  }
+}
+
+.empty {
+  @extend .base_button;
+  background-color: var(--color-white);
+  border: solid var(--size-xxs) var(--color-accent);
+}
+
+.filled {
+  @extend .base_button;
+  background-color: var(--color-accent);
+  border: none;
+  color: var(--color-white);
+  &:focus-visible {
+    outline: var(--color-black) 2px solid;
+  }
+}
+
+.disabled {
+  pointer-events: none;
+}

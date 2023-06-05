@@ -2,7 +2,7 @@
   "name": "project-template",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://stepanovkirill.github.io/project-template/",
+  "homepage": "https://stepanovkirill.github.io/apricode-test/",
   "dependencies": {
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-react": "^7.18.6",
@@ -14,18 +14,23 @@
     "@types/node": "^16.18.14",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
+    "clsx": "^1.2.1",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-prettier": "^8.7.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react-perf": "^3.3.1",
+    "mobx": "^6.9.0",
+    "mobx-react-lite": "^3.4.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.9.0",
     "react-router": "^6.8.2",
     "react-router-dom": "^6.8.2",
     "react-scripts": "5.0.1",
     "sass": "^1.58.3",
     "typescript": "^4.9.5",
+    "uuid": "^9.0.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -34,6 +39,7 @@
     "test": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject",
     "lint": "eslint ./src/",
+    "prettify": "prettier ./src --write",
     "precommit-hook": "lint-staged"
   },
   "husky": {
@@ -43,9 +49,6 @@
     }
   },
   "lint-staged": {
-    "src/**/*.scss": [
-      "stylelint scss"
-    ],
     "src/**/*.{js,jsx,ts,tsx}": [
       "eslint --fix",
       "prettier --write"
@@ -70,11 +73,9 @@
     ]
   },
   "devDependencies": {
+    "@types/uuid": "^9.0.1",
     "husky": "^4.3.8",
     "lint-staged": "^13.1.2",
-    "prettier": "^2.8.4",
-    "stylelint": "^15.2.0",
-    "stylelint-config-clean-order": "^5.0.0",
-    "stylelint-config-standard": "^30.0.1"
+    "prettier": "^2.8.4"
   }
 }

@@ -1,0 +1,25 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  min-width: 350px;
+  min-height: 100%;
+}
+
+.threeContainer {
+  height: 100%;
+
+  overflow-y: auto;
+
+  &::-webkit-scrollbar-thumb {
+    background-color: blue;
+  }
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color:tomato;
+  }
+}

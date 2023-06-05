@@ -1,0 +1,42 @@
+.nextLevel {
+  padding-left: var(--size-md);
+  background-color: var(--color-white);
+  border-radius: 0 0 var(--size-s) var(--size-s);
+}
+
+.baseItem {
+  display: flex;
+  padding: 0 var(--size-xs);
+  width: 100%;
+  height: var(--size-xxxl);
+  align-items: center;
+  cursor: pointer;
+}
+
+.rootItem {
+  @extend .baseItem;
+  background-color: var(--color-secondary);
+  & input[type="text"] {
+    font: var(--font-s);
+  }
+}
+
+.item {
+  @extend .baseItem;
+
+  & input[type="text"] {
+    font: var(--font-xs);
+  }
+}
+
+.addNestedIcon {
+  display: flex;
+}
+
+.plus {
+  margin-right: calc(0px - var(--size-s));
+}
+
+.itemControls {
+  display: flex;
+}
