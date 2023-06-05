@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react-lite';
 import { v4 as uuid } from 'uuid';
+import { BsChevronDown, BsListNested, BsPlus, BsPlusLg, BsTrash3 } from 'react-icons/bs';
 
 import styles from './ItemList.module.scss';
 import EditableInput from '../EditableInput/EditableInput';
 import { StoreContext } from '../../stores/TreeStore';
 import { ListItem, Node } from '../../types';
+import IconWithAction from '../IconWithAction/IconWithAction';
 
 interface ItemListProps {
   item: ListItem;
@@ -54,43 +56,52 @@ const ItemList = observer(
       store.deleteItem(parentId, id);
     }, [store, parentId, id]);
 
-    const nextItems = (
-      <ul className={styles.nextLevel}>
-        {children?.map((child) => (
-          // eslint-disable-next-line
-          <ItemList key={uuid()} {...child}>
-            {child.children}
-          </ItemList>
-        ))}
-      </ul>
-    );
+    const nextItems = children?.map((child) => (
+      // eslint-disable-next-line
+      <ItemList key={uuid()} {...child} />
+    ));
 
     if (id === 'root') {
-      return nextItems;
+      // eslint-disable-next-line react/jsx-no-useless-fragment
+      return <>{nextItems}</>;
     }
 
     return (
       <>
-        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
-        <li className={styles.item} tabIndex={0} onFocus={handleSelectItem} draggable>
-          <div className={styles.item}>
-            <EditableInput title={title} onSave={handleSave} />
+        <li
+          className={parentId === 'root' ? styles.rootItem : styles.item}
+          /* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */
+          tabIndex={0}
+          onFocus={handleSelectItem}
+          draggable
+        >
+          {!!children?.length && (
+            <IconWithAction onClick={toggleExpanded}>
+              <BsChevronDown />
+            </IconWithAction>
+          )}
+          <EditableInput
+            title={title}
+            onSave={handleSave}
+            placeholder="Название задачи"
+          />
+          <div className={styles.itemControls}>
             <input type="checkbox" onChange={toggleCheck} checked={checked} />
-            <button type="button" onClick={toggleExpanded}>
-              {!!children?.length && (expanded ? 'V' : '>')}
-            </button>
-            <button type="button" onClick={handleAddNestedItem}>
-              Добавить подзадачу
-            </button>
-            <button type="button" onClick={handleAddItem}>
-              Добавить задачу
-            </button>
-            <button type="button" onClick={handleDeleteItem}>
-              Удалить эту задачу
-            </button>
+            <IconWithAction onClick={handleAddNestedItem}>
+              <div className={styles.addNestedIcon}>
+                <BsPlus className={styles.plus} />
+                <BsListNested />
+              </div>
+            </IconWithAction>
+            <IconWithAction onClick={handleAddItem}>
+              <BsPlusLg />
+            </IconWithAction>
+            <IconWithAction onClick={handleDeleteItem}>
+              <BsTrash3 />
+            </IconWithAction>
           </div>
         </li>
-        {expanded && nextItems}
+        {expanded && <ul className={styles.nextLevel}>{nextItems}</ul>}
       </>
     );
   },

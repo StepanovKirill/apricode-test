@@ -1,4 +1,11 @@
-.wrapper {
+.editorWrapper {
   display: flex;
   flex-direction: column;
+  width: 100%;
+}
+
+.titleEditor {
+  font: var(--font-md);
+  margin-bottom: var(--size-md);
+  padding: var(--size-s);
 }

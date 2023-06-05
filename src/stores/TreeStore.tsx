@@ -6,6 +6,7 @@ import { ListItem, Node } from '../types';
 import saveTasks from '../helpers/saveTasks';
 import applyFuncToAllChild from '../helpers/applyFuncToAllChild';
 import checkSelectAllChildren from '../helpers/checkSelectAllChildren';
+import getAllSelectedItems from '../helpers/getAllSelectedItems';
 
 function toggleCheck(item: Node<ListItem>, chk: boolean) {
   // eslint-disable-next-line no-param-reassign
@@ -22,12 +23,20 @@ function toggleSubTask(item: Node<ListItem>, expanded = false) {
   item.item.expanded = expanded;
 }
 
+const initialTree: Node<ListItem> = {
+  item: {
+    id: 'root',
+    parentId: '',
+  },
+  children: [],
+};
+
 class TreeStore {
   tree: Node<ListItem> = {} as Node<ListItem>;
 
   checkedItems: Array<{ parentId: string; id: string }> = [];
 
-  idActiveItem = '';
+  activeItemId = '';
 
   isModalOpen = false;
 
@@ -47,19 +56,13 @@ class TreeStore {
     const data = localStorage.getItem('tasks');
 
     if (!data) {
-      const rootNode: Node<ListItem> = {
-        item: {
-          id: 'root',
-          parentId: '',
-        },
-        children: [],
-      };
+      saveTasks(initialTree);
 
-      saveTasks(rootNode);
-
-      this.tree = rootNode;
+      this.tree = initialTree;
     } else {
       this.tree = JSON.parse(data) as Node<ListItem>;
+      if (this.tree.children.length) this.activeItemId = this.tree.children[0].item.id;
+      this.checkedItems = applyFuncToAllChild(this.tree, getAllSelectedItems);
     }
   }
 
@@ -115,6 +118,17 @@ class TreeStore {
     this.checkedItems = [];
   }
 
+  deleteAllItems() {
+    this.tree = initialTree;
+    this.clearActiveItemId();
+    this.checkedItems = [];
+    saveTasks(this.tree);
+  }
+
+  checkAllItems() {
+    this.toggleCheckTask('root', !this.tree.item.checked);
+  }
+
   getTaskById(id: string) {
     const stack = [this.tree];
 
@@ -165,11 +179,16 @@ class TreeStore {
     if (task) {
       task.item.checked = check;
 
-      this.checkedItems.push({ parentId: task.item.parentId, id: task.item.id });
+      const changedItems = [
+        { parentId: task.item.parentId, id: task.item.id },
+        ...applyFuncToAllChild(task, toggleCheck, check),
+      ];
       if (check) {
-        this.checkedItems.push(...applyFuncToAllChild(task, toggleCheck, check));
+        this.checkedItems.push(...changedItems);
       } else {
-        this.checkedItems = this.checkedItems.filter((item) => item.id !== id);
+        this.checkedItems = this.checkedItems.filter(
+          (item) => !changedItems.find((changedItem) => changedItem.id === item.id),
+        );
       }
       this.applyFuncToAllParent(task, this.checkNestedSelect);
     }
@@ -191,11 +210,11 @@ class TreeStore {
   }
 
   setActiveItemId(id: string) {
-    this.idActiveItem = id;
+    this.activeItemId = id;
   }
 
   clearActiveItemId() {
-    this.idActiveItem = '';
+    this.activeItemId = '';
   }
 
   openModal() {
@@ -206,7 +225,7 @@ class TreeStore {
     this.isModalOpen = false;
   }
 
-  // eslint-disable-next-line @typescript-eslint/ban-types
+  // eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
   applyFuncToAllParent(child: Node<ListItem>, callback: Function, ...args: any[]) {
     let { parentId } = child.item;
 

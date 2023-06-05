@@ -1,0 +1,25 @@
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: none;
+  background-color: transparent;
+  outline: none;
+  padding: 0;
+  min-width: var(--size-xxl);
+  min-height: var(--size-xxl);
+
+  &:disabled {
+    opacity: var(--opacity-disable);
+  }
+  &:focus-visible {
+    outline: 1px solid var(--color-accent);
+    border-radius: var(--size-xxs);
+  }
+  &:hover {
+    cursor: pointer;
+    outline: 1px solid var(--color-accent);
+    border-radius: var(--size-xxs);
+  }
+}

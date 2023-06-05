@@ -3,6 +3,9 @@ import React from 'react';
 import styles from './AddNewTaskModal.module.scss';
 import Modal from '../Modal/Modal';
 import { StoreContext } from '../../stores/TreeStore';
+import TextArea from '../TextArea/TextArea';
+import EditableInput from '../EditableInput/EditableInput';
+import Button from '../Button/Button';
 
 function AddNewTaskModal() {
   const store = React.useContext(StoreContext);
@@ -10,19 +13,13 @@ function AddNewTaskModal() {
   const [title, setTitle] = React.useState('');
   const [description, setDescription] = React.useState('');
 
-  const handleTitleChange = React.useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setTitle(e.target.value);
-    },
-    [],
-  );
+  const handleTitleChange = React.useCallback((newTitle: string) => {
+    setTitle(newTitle);
+  }, []);
 
-  const handleDescriptionChange = React.useCallback(
-    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      setDescription(e.target.value);
-    },
-    [],
-  );
+  const handleDescriptionChange = React.useCallback((newDescription: string) => {
+    setDescription(newDescription);
+  }, []);
 
   const handleAddNewTask = React.useCallback(() => {
     store.addItem(title, description);
@@ -37,23 +34,24 @@ function AddNewTaskModal() {
   return (
     <Modal isOpen={store.isModalOpen} handleClose={handleCloseModal}>
       <div className={styles.container}>
-        <input
+        <EditableInput
+          className={styles.titleInput}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
           autoFocus
-          type="text"
-          value={title}
-          onChange={handleTitleChange}
+          title={title}
+          onSave={handleTitleChange}
           placeholder="Название задачи"
           autoComplete="off"
         />
-        <textarea
+        <TextArea
           value={description}
           onChange={handleDescriptionChange}
-          placeholder="Что нужно сделать?"
+          className={styles.descriptionInput}
+          placeholder="Описание задачи"
         />
-        <button type="button" onClick={handleAddNewTask}>
+        <Button onClick={handleAddNewTask} className={styles.createButton}>
           Создать задачу
-        </button>
+        </Button>
       </div>
     </Modal>
   );

@@ -5,16 +5,20 @@ import { v4 as uuid } from 'uuid';
 import styles from './TreeTask.module.scss';
 import ItemList from '../ItemList/ItemList';
 import { StoreContext } from '../../stores/TreeStore';
+import TreeControls from '../TreeControls/TreeControls';
 
 const TreeTask = observer(() => {
   const store = React.useContext(StoreContext);
   const { tree } = store;
 
   return (
-    <ul className={styles.threeContainer}>
-      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      <ItemList key={uuid()} {...tree} />
-    </ul>
+    <section className={styles.wrapper}>
+      <TreeControls />
+      <ul className={styles.threeContainer}>
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+        <ItemList key={uuid()} {...tree} />
+      </ul>
+    </section>
   );
 });
 

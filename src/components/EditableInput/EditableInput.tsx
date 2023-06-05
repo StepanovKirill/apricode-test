@@ -1,34 +1,51 @@
 import React from 'react';
+import clsx from 'clsx';
+
+import styles from './EditableInput.module.scss';
 
 interface EditableInputProps {
   title: string;
   onSave: (newValue: string) => void;
+  className?: string;
+  autoFocus?: boolean;
+  placeholder?: string;
+  autoComplete?: string;
 }
 
-function EditableInput({ title, onSave }: EditableInputProps) {
+function EditableInput({
+  title,
+  onSave,
+  className = '',
+  autoFocus = false,
+  placeholder = 'Placeholder',
+  autoComplete = 'on',
+}: EditableInputProps) {
   const [isEdit, toggleIsEdit] = React.useState(false);
-  const [newTitle, setNewTitle] = React.useState(title);
 
-  const inputRef = React.useRef<HTMLInputElement>(null);
+  const mergedClassName = clsx(styles.editableInput, className);
 
   const toggleEdit = React.useCallback(() => {
-    if (isEdit) {
-      onSave(newTitle);
-    }
-
     toggleIsEdit((prev) => !prev);
-  }, [isEdit, newTitle, onSave]);
-
-  const handleChangeName = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewTitle(e.target.value);
   }, []);
+
+  const handleChangeName = React.useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (isEdit) {
+        onSave(e.target.value);
+      }
+    },
+    [onSave, isEdit],
+  );
 
   return (
     <input
+      className={mergedClassName}
       type="text"
-      ref={inputRef}
-      placeholder="Новая задача"
-      value={newTitle}
+      value={title}
+      // eslint-disable-next-line jsx-a11y/no-autofocus
+      autoFocus={autoFocus}
+      autoComplete={autoComplete}
+      placeholder={placeholder}
       onBlur={toggleEdit}
       onFocus={toggleEdit}
       onChange={handleChangeName}

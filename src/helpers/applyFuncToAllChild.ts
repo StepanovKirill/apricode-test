@@ -4,6 +4,7 @@ export default function applyFuncToAllChild(
   root: Node<ListItem>,
   // eslint-disable-next-line @typescript-eslint/ban-types
   callback: Function,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ...args: any[]
 ) {
   const changedItems: Array<{ parentId: string; id: string }> = [];

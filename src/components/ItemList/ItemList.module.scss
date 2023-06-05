@@ -1,13 +1,42 @@
 .nextLevel {
-  margin-left: 16px;
+  padding-left: var(--size-md);
+  background-color: var(--color-white);
+  border-radius: 0 0 var(--size-s) var(--size-s);
+}
+
+.baseItem {
+  display: flex;
+  padding: 0 var(--size-xs);
+  width: 100%;
+  height: var(--size-xxxl);
+  align-items: center;
+  cursor: pointer;
+}
+
+.rootItem {
+  @extend .baseItem;
+  background-color: var(--color-secondary);
+  & input[type="text"] {
+    font: var(--font-s);
+  }
 }
 
 .item {
-  display: flex;
-  height: 30px;
-  align-items: center;
-  border: 2px solid green;
-  background-color: greenyellow;
+  @extend .baseItem;
 
-  backdrop-filter: none;
+  & input[type="text"] {
+    font: var(--font-xs);
+  }
+}
+
+.addNestedIcon {
+  display: flex;
+}
+
+.plus {
+  margin-right: calc(0px - var(--size-s));
+}
+
+.itemControls {
+  display: flex;
 }

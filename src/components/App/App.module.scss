@@ -1,8 +1,17 @@
 .wrapper {
+  min-height: 100dvh;
   min-height: 100vh;
-  overflow-y: scroll;
-  background-color: #dadada;
+  background-color: var(--color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0 50px;
+}
+
+.main {
+  display: flex;
+  gap: var(--size-xxl);
+  width: 100%;
+  min-height: 75dvh;
+  min-height: 75vh;
 }
