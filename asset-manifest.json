@@ -1,15 +1,18 @@
 {
   "files": {
-    "main.css": "/project-template/static/css/main.61a04d9d.css",
-    "main.js": "/project-template/static/js/main.22daaa42.js",
-    "static/js/787.a32225a8.chunk.js": "/project-template/static/js/787.a32225a8.chunk.js",
-    "index.html": "/project-template/index.html",
-    "main.61a04d9d.css.map": "/project-template/static/css/main.61a04d9d.css.map",
-    "main.22daaa42.js.map": "/project-template/static/js/main.22daaa42.js.map",
-    "787.a32225a8.chunk.js.map": "/project-template/static/js/787.a32225a8.chunk.js.map"
+    "main.css": "/apricode-test/static/css/main.bd13a050.css",
+    "main.js": "/apricode-test/static/js/main.8279a228.js",
+    "static/js/787.a32225a8.chunk.js": "/apricode-test/static/js/787.a32225a8.chunk.js",
+    "static/media/Inter-ExtraBold.woff2": "/apricode-test/static/media/Inter-ExtraBold.c93797b3963d4d364377.woff2",
+    "static/media/Inter-Medium.woff2": "/apricode-test/static/media/Inter-Medium.01f03178adde434fc9fa.woff2",
+    "static/media/Inter-Regular.woff2": "/apricode-test/static/media/Inter-Regular.bd097ceff83f90802a12.woff2",
+    "index.html": "/apricode-test/index.html",
+    "main.bd13a050.css.map": "/apricode-test/static/css/main.bd13a050.css.map",
+    "main.8279a228.js.map": "/apricode-test/static/js/main.8279a228.js.map",
+    "787.a32225a8.chunk.js.map": "/apricode-test/static/js/787.a32225a8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.61a04d9d.css",
-    "static/js/main.22daaa42.js"
+    "static/css/main.bd13a050.css",
+    "static/js/main.8279a228.js"
   ]
 }
