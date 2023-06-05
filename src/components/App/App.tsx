@@ -1,6 +1,5 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { v4 as uuid } from 'uuid';
 
 import styles from './App.module.scss';
 import StoreProvider, { StoreContext } from '../../stores/TreeStore';
