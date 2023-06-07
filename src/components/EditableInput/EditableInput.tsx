@@ -1,7 +1,9 @@
 import React from 'react';
 import clsx from 'clsx';
+import { BsFillPencilFill } from 'react-icons/bs';
 
 import styles from './EditableInput.module.scss';
+import IconWithAction from '../IconWithAction/IconWithAction';
 
 interface EditableInputProps {
   title: string;
@@ -24,7 +26,7 @@ function EditableInput({
 
   const mergedClassName = clsx(styles.editableInput, className);
 
-  const toggleEdit = React.useCallback(() => {
+  const handleToggleEdit = React.useCallback(() => {
     toggleIsEdit((prev) => !prev);
   }, []);
 
@@ -46,8 +48,8 @@ function EditableInput({
       autoFocus={autoFocus}
       autoComplete={autoComplete}
       placeholder={placeholder}
-      onBlur={toggleEdit}
-      onFocus={toggleEdit}
+      onBlur={handleToggleEdit}
+      onFocus={handleToggleEdit}
       onChange={handleChangeName}
     />
   );

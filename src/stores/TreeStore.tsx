@@ -1,6 +1,7 @@
 import React, { createContext } from 'react';
 import { makeAutoObservable } from 'mobx';
 import { v4 as uuid } from 'uuid';
+import _ from 'lodash';
 
 import { ListItem, Node } from '../types';
 import saveTasks from '../helpers/saveTasks';
@@ -23,7 +24,7 @@ function toggleSubTask(item: Node<ListItem>, expanded = false) {
   item.item.expanded = expanded;
 }
 
-const initialTree: Node<ListItem> = {
+export const initialTree: Node<ListItem> = {
   item: {
     id: 'root',
     parentId: '',
@@ -34,11 +35,15 @@ const initialTree: Node<ListItem> = {
 class TreeStore {
   tree: Node<ListItem> = {} as Node<ListItem>;
 
+  searchResults: Node<ListItem> = {} as Node<ListItem>;
+
   checkedItems: Array<{ parentId: string; id: string }> = [];
 
   activeItemId = '';
 
   isModalOpen = false;
+
+  searchString = '';
 
   parentIdNewTask = '';
 
@@ -238,6 +243,36 @@ class TreeStore {
       callback(item, ...args);
       parentId = item?.item.parentId;
     }
+  }
+
+  search() {
+    this.searchResults = _.cloneDeep(this.tree);
+
+    const stack = [this.searchResults];
+
+    while (stack.length) {
+      const item = stack.pop();
+      if (item) {
+        item.children = item.children.filter((child) =>
+          child.item.title?.toLowerCase().includes(this.searchString),
+        );
+        stack.push(...item.children);
+      }
+    }
+  }
+
+  setSearchString(searchString: string) {
+    this.searchString = searchString.toLowerCase();
+    if (!searchString.length) {
+      this.clearSearchResults();
+    } else {
+      this.search();
+    }
+  }
+
+  clearSearchResults() {
+    this.searchResults = {} as Node<ListItem>;
+    this.searchString = '';
   }
 }
 
