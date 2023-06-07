@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  max-width: 100%;
+}
+
+.input {
+  height: var(--size-xxl);
+  padding: var(--size-s);
+  background-color: var(--color-white);
+  border: none;
+  outline: none;
+  border-radius: var(--size-xs) 0 0 var(--size-xs);
+}
+
+.emptyBox {
+  width: var(--size-xxl);
+  height: var(--size-xxl);
+  background-color: var(--color-white);
+  border-radius: 0 var(--size-xs) var(--size-xs) 0;
+}
+
+.clearIconContainer {
+  border-radius: 0 var(--size-xs) var(--size-xs) 0;
+  background-color: var(--color-white);
+
+  &:hover {
+    outline: none;
+  }
+}
+
+.clearIcon {
+  width: var(--size-xl);
+  height: var(--size-xl);
+  transform: rotate(45deg);
+}

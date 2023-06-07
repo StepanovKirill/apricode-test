@@ -20,6 +20,7 @@
     "eslint-config-prettier": "^8.7.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react-perf": "^3.3.1",
+    "lodash": "^4.17.21",
     "mobx": "^6.9.0",
     "mobx-react-lite": "^3.4.3",
     "react": "^18.2.0",
@@ -73,6 +74,7 @@
     ]
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.195",
     "@types/uuid": "^9.0.1",
     "husky": "^4.3.8",
     "lint-staged": "^13.1.2",

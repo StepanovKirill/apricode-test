@@ -6,8 +6,12 @@
   align-items: center;
   height: var(--size-xxl);
   padding: var(--size-md);
-
   font: var(--font-xs);
+
+  &:hover {
+    cursor: pointer;
+  }
+  
   &:active {
     box-shadow: var(--shadow);
     transition-duration: 0.05s;

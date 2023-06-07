@@ -9,14 +9,14 @@ import TreeControls from '../TreeControls/TreeControls';
 
 const TreeTask = observer(() => {
   const store = React.useContext(StoreContext);
-  const { tree } = store;
+  const { tree, searchResults, searchString } = store;
 
   return (
     <section className={styles.wrapper}>
       <TreeControls />
       <ul className={styles.threeContainer}>
         {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-        <ItemList key={uuid()} {...tree} />
+        <ItemList key={uuid()} {...(searchString ? searchResults : tree)} />
       </ul>
     </section>
   );
