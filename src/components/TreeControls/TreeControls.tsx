@@ -36,23 +36,25 @@ const TreeControls = observer(() => {
   );
 
   return (
-    <div className={styles.buttonGroup}>
+    <div className={styles.wrapper}>
       <ClearableInput
         onSearch={handleSearch}
         placeholder="Поиск"
         onClear={store.clearSearchResults}
       />
-      <Button onClick={handleAddNewRootTask}>
-        <BsPlusLg />
-      </Button>
-      <Button onClick={handleCheckAllItems}>
-        <BsCheckAll />
-      </Button>
-      <Button onClick={handleDeleteCheckedItems} disabled={!store.checkedItems.length}>
-        Удалить выбранные
-      </Button>
+      <div className={styles.buttonGroup}>
+        <Button onClick={handleAddNewRootTask}>
+          <BsPlusLg />
+        </Button>
+        <Button onClick={handleCheckAllItems}>
+          <BsCheckAll />
+        </Button>
+        <Button onClick={handleDeleteCheckedItems} disabled={!store.checkedItems.length}>
+          Удалить выбранные
+        </Button>
 
-      <Button onClick={handleDeleteAllItems}>Очистить</Button>
+        <Button onClick={handleDeleteAllItems}>Очистить</Button>
+      </div>
     </div>
   );
 });
